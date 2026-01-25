@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quick Feedback</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; background: #ffffff; color: #111; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 28px 18px; }
+    .card { border: 1px solid #ddd; border-radius: 16px; padding: 22px; }
+    h1 { margin: 0 0 10px; font-size: 28px; }
+    p { margin: 0 0 14px; line-height: 1.45; }
+    .btnrow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 8px; }
+    button { font-size: 18px; padding: 14px 12px; border-radius: 12px; border: 1px solid #ccc; background: #f7f7f7; cursor: pointer; }
+    button:hover { background: #eee; }
+    .small { font-size: 13px; color: #444; margin-top: 12px; }
+    .status { margin-top: 12px; font-size: 14px; color: #333; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>We’d love your feedback</h1>
+      <p>How was your screening experience today?</p>
+
+      <div class="btnrow">
+        <button onclick="go('good')">👍 Good</button>
+        <button onclick="go('needs_improvement')">👎 Needs improvement</button>
+      </div>
+
+      <div class="status">
+        Tap an option — you’ll be taken to the official TSA feedback page.
+      </div>
+
+      <div class="small">
+        Voluntary • No personal information collected • Official TSA feedback opens next
+      </div>
+    </div>
+  </div>
+
+<script>
+  function go(vote) {
+    window.location.href = "https://www.tsa.gov/contact/contact-forms";
+  }
+</script>
+</body>
+</html>
