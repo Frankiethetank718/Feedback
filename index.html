@@ -13,8 +13,8 @@
     .btnrow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 8px; }
     button { font-size: 18px; padding: 14px 12px; border-radius: 12px; border: 1px solid #ccc; background: #f7f7f7; cursor: pointer; }
     button:hover { background: #eee; }
-    .small { font-size: 13px; color: #444; margin-top: 12px; }
     .status { margin-top: 12px; font-size: 14px; color: #333; }
+    .small { font-size: 13px; color: #444; margin-top: 12px; }
   </style>
 </head>
 <body>
@@ -40,8 +40,6 @@
 
 <script>
   const TSA_URL = "https://www.tsa.gov/contact/contact-forms";
-
-  // Paste your Apps Script Web App URL here (ends with /exec)
   const LOG_ENDPOINT = "https://script.google.com/macros/s/AKfycbyYU29-t-COqXW4KeOWcHnoYiXMEOpzrgZ0w5LxSb0nP80Y8u0I9Iy3kacDs5GVqV5h/exec";
 
   const SOURCE = "edward_otero";
@@ -57,17 +55,13 @@
         tz: Intl.DateTimeFormat().resolvedOptions().timeZone || ""
       });
 
-      // best-effort logging; does NOT block redirect
-      fetch(LOG_ENDPOINT + "?" + params.toString(), {
-        method: "GET",
-        mode: "no-cors",
-        cache: "no-store"
-      });
+      const img = new Image();
+      img.src = LOG_ENDPOINT + "?" + params.toString();
     } catch (e) {}
 
-    // Always redirect
     window.location.href = TSA_URL;
   }
 </script>
 </body>
 </html>
+
