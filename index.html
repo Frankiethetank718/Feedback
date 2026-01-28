@@ -24,8 +24,8 @@
       <p>How was your screening experience today?</p>
 
       <div class="btnrow">
-        <button onclick="go('good')">👍 Good</button>
-        <button onclick="go('needs_improvement')">👎 Needs improvement</button>
+        <button type="button" onclick="go('good')">👍 Good</button>
+        <button type="button" onclick="go('needs_improvement')">👎 Needs improvement</button>
       </div>
 
       <div class="status">
@@ -37,37 +37,37 @@
       </div>
     </div>
   </div>
+
 <script>
   const TSA_URL = "https://www.tsa.gov/contact/contact-forms";
 
-  // PASTE your Apps Script Web App URL here (ends with /exec)
+  // Paste your Apps Script Web App URL here (ends with /exec)
   const LOG_ENDPOINT = https://script.google.com/macros/s/AKfycbyYU29-t-COqXW4KeOWcHnoYiXMEOpzrgZ0w5LxSb0nP80Y8u0I9Iy3kacDs5GVqV5h/exec
 
   const SOURCE = "edward_otero";
   const CHECKPOINT = "east";
 
-  function qs(obj) {
-    return Object.entries(obj)
-      .map(([k,v]) => encodeURIComponent(k) + "=" + encodeURIComponent(v))
-      .join("&");
-  }
-
-  async function go(vote) {
-    const payload = {
-      source: SOURCE,
-      checkpoint: CHECKPOINT,
-      vote: vote,
-      ts: new Date().toISOString(),
-      tz: Intl.DateTimeFormat().resolvedOptions().timeZone || ""
-    };
-
+  function go(vote) {
     try {
-      const url = LOG_ENDPOINT + "?" + qs(payload);
-      await fetch(url, { method: "GET", mode: "no-cors", cache: "no-store" });
+      const params = new URLSearchParams({
+        source: SOURCE,
+        checkpoint: CHECKPOINT,
+        vote: vote,
+        ts: new Date().toISOString(),
+        tz: Intl.DateTimeFormat().resolvedOptions().timeZone || ""
+      });
+
+      // best-effort logging; does NOT block redirect
+      fetch(LOG_ENDPOINT + "?" + params.toString(), {
+        method: "GET",
+        mode: "no-cors",
+        cache: "no-store"
+      });
     } catch (e) {}
 
+    // Always redirect
     window.location.href = TSA_URL;
   }
 </script>
-
-
+</body>
+</html>
